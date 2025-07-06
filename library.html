@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Library</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">NotSpotify</div>
+    <ul class="nav-links">
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="search.html">Search</a></li>
+      <li><a href="library.html">Library</a></li>
+    </ul>
+  </div>
+       <div class="text-sm text-gray-400">NOTSPOTIFY(SHAUN SPOTIFY PLAYLIST WEBSITE)</div>
+  <div class="main-content">
+    <div class="content-header">
+      <h1>Library</h1>
+    </div>
+    <div class="container" id="library-container">
+      <!-- Library items will go here -->
+    </div>
+  </div>
+
+  <div id="popup-modal">
+    <div class="popup-content">
+      <span class="close-btn">&times;</span>
+      <img id="popup-img" src="" alt="" />
+      <h2 id="popup-title"></h2>
+      <p id="popup-desc"></p>
+      <a id="popup-link" href="" target="_blank" title="Listen on Spotify">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify" style="width:40px;height:40px;vertical-align:middle;">
+        <span style="vertical-align:middle;">Listen on Spotify</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const libraryContainer = document.getElementById('library-container');
+    let library = JSON.parse(localStorage.getItem('library')) || [];
+
+    if (library.length === 0) {
+      libraryContainer.innerHTML = "<p style='color:gray;'>Your library is empty.</p>";
+    } else {
+      library.forEach(item => {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('img-wrapper');
+        wrapper.dataset.title = item.title;
+        wrapper.dataset.desc = item.desc;
+        wrapper.dataset.link = item.link;
+        wrapper.dataset.img = item.img;
+
+        wrapper.innerHTML = `
+          <img src="${item.img}" alt="${item.title}" style="pointer-events: none;">
+          <span class="hover-text">${item.title}</span>
+          <button class="remove-btn">-</button>
+        `;
+
+        // Open modal on click
+        wrapper.addEventListener('click', () => {
+          document.getElementById('popup-img').src = wrapper.dataset.img;
+          document.getElementById('popup-title').textContent = wrapper.dataset.title;
+          document.getElementById('popup-desc').textContent = wrapper.dataset.desc;
+          document.getElementById('popup-link').href = wrapper.dataset.link;
+          document.getElementById('popup-modal').style.display = 'flex';
+          document.body.classList.add('blur-bg');
+        });
+
+        // Remove button logic
+        wrapper.querySelector('.remove-btn').addEventListener('click', (e) => {
+          e.stopPropagation(); // prevent modal
+          library = library.filter(entry => entry.title !== item.title);
+          localStorage.setItem('library', JSON.stringify(library));
+          location.reload();
+        });
+
+        // Shake and tears on remove button hover
+        const removeBtn = wrapper.querySelector('.remove-btn');
+        removeBtn.addEventListener('mouseenter', () => {
+          wrapper.classList.add('shake');
+
+          // Create tear particles
+          for (let i = 0; i < 5; i++) {
+            const tear = document.createElement('div');
+            tear.classList.add('tear');
+            tear.style.left = Math.random() * 80 + 10 + 'px';
+            wrapper.appendChild(tear);
+
+            setTimeout(() => {
+              tear.remove();
+            }, 1500);
+          }
+        });
+
+        removeBtn.addEventListener('mouseleave', () => {
+          wrapper.classList.remove('shake');
+        });
+
+        libraryContainer.appendChild(wrapper);
+      });
+    }
+
+    // Modal close
+    document.querySelector('#popup-modal .close-btn').onclick = function () {
+      document.getElementById('popup-modal').style.display = 'none';
+      document.body.classList.remove('blur-bg');
+    };
+
+    document.getElementById('popup-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+        document.body.classList.remove('blur-bg');
+      }
+    });
+  </script>
+</body>
+</html>

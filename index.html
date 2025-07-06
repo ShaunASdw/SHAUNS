@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spotify-like Website</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">NotSpotify</div>
+    <ul class="nav-links">
+      <li><a href="#">HOME</a></li>
+      <li><a href="search.html">Search</a></li>
+      <li><a href="library.html">Library</a></li>
+    </ul>
+  </div>
+
+       <div class="text-sm text-gray-400">NOTSPOTIFY(SHAUN SPOTIFY PLAYLIST WEBSITE)</div>
+  <div class="main-content">
+    <div class="content-header">
+      <h1>Popular Playlists</h1>
+    </div>
+    <div class="container">
+      <div class="img-wrapper" style="cursor:pointer;" tabindex="0" data-title="Loveworm" data-desc="A refreshing indie track with mellow vibes and crisp melodies." data-link="https://open.spotify.com/album/475CNcvlqtRpaXjTcn4hCP?si=F7LYpgvoTByJRqTucCL3-A" data-img="applecider.jpg">
+        <img src="applecider.jpg" alt="Apple Cider" style="pointer-events: none;">
+        <span class="hover-text">Loveworm</span>
+        <button class="add-btn">+</button>
+      </div>
+      <div class="img-wrapper" style="cursor:pointer;" tabindex="0" data-title="NEVER ENOUGH(BONUS VERSION)" data-desc="A heartfelt song with emotional lyrics and soothing tunes." data-link="https://open.spotify.com/album/0qGQrHicD7qXuz5VMlDuCe?si=U8eKzHFkQRG6yGtF3xc7Zg" data-img="daniel.jpg">
+        <img src="daniel.jpg" alt="Daniel" style="pointer-events: none;">
+        <span class="hover-text">NEVER ENOUGH(BONUS VERSION)</span>
+        <button class="add-btn">+</button>
+      </div>
+      <div class="img-wrapper" style="cursor:pointer;" tabindex="0" data-title="Buddy Holly" data-desc="A classic hit that brings nostalgia and timeless energy." data-link="https://open.spotify.com/album/1xpGyKyV26uPstk1Elgp9Q?si=1EYmqwCTSu-X-U6CMLiAIg" data-img="buddyholly.jpg">
+        <img src="buddyholly.jpg" alt="Buddy Holly" style="pointer-events: none;">
+        <span class="hover-text">Buddy Holly</span>
+        <button class="add-btn">+</button>
+      </div>
+      <div class="img-wrapper" style="cursor:pointer;" tabindex="0" data-title="Summer flows 0.02" data-desc="Feel the warmth of summer with this chill and vibrant tune." data-link="https://open.spotify.com/album/3NRNR4txhuRLhnQUUlqWXH?si=jCVKnEvvTvGTEO2JZGLUEQ" data-img="wave.jpg">
+        <img src="wave.jpg" alt="Summer flows" style="pointer-events: none;">
+        <span class="hover-text">Summer flows</span>
+        <button class="add-btn">+</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup-modal">
+    <div class="popup-content">
+      <span class="close-btn">&times;</span>
+      <img id="popup-img" src="" alt="" />
+      <h2 id="popup-title"></h2>
+      <p id="popup-desc"></p>
+      <a id="popup-link" href="" target="_blank" title="Listen on Spotify">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify" style="width:40px;height:40px;vertical-align:middle;">
+        <span style="vertical-align:middle;">Listen on Spotify</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
